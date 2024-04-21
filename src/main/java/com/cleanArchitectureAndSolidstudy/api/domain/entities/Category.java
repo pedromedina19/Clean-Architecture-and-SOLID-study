@@ -1,5 +1,7 @@
 package com.cleanArchitectureAndSolidstudy.api.domain.entities;
 
+import com.cleanArchitectureAndSolidstudy.api.infra.dtos.CategoryDto;
+import com.cleanArchitectureAndSolidstudy.api.infra.dtos.ProductDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,5 +21,11 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private List<Product> products;
+
+    //convert DTO into entity
+    public Category(CategoryDto categoryDto){
+        this.id = categoryDto.id();
+        this.name = categoryDto.name();
+    }
 
 }
