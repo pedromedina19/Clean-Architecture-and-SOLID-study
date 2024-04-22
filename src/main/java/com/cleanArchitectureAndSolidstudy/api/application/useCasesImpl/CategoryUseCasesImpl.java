@@ -31,5 +31,12 @@ public class CategoryUseCasesImpl implements CategoryUseCases {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public CategoryDto findById(Long id){
+        return categoryRepository.findById(id)
+                .map(CategoryDto::fromCategory)
+                .orElse(null);
+    }
+
     
 }
