@@ -38,5 +38,10 @@ public class CategoryUseCasesImpl implements CategoryUseCases {
                 .orElse(null);
     }
 
+    @Override
+    public void deleteById(Long id){
+        categoryRepository.deleteById(id);
+    }
+
     
 }
