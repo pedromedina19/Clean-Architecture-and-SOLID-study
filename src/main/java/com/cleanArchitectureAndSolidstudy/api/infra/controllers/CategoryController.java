@@ -1,6 +1,7 @@
 package com.cleanArchitectureAndSolidstudy.api.infra.controllers;
 
 import com.cleanArchitectureAndSolidstudy.api.application.useCases.CategoryUseCases;
+import com.cleanArchitectureAndSolidstudy.api.infra.Exceptions.ResourceNotFoundException;
 import com.cleanArchitectureAndSolidstudy.api.infra.dtos.CategoryDto;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,17 +28,21 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     public CategoryDto findById(@PathVariable Long id) {
-        return categoryUseCases.findById(id);
+        CategoryDto category = categoryUseCases.findById(id);
+        if (category == null) {
+            throw new ResourceNotFoundException("Categoria não encontrada");
+        }
+        return category;
     }
 
     @PutMapping("/{id}")
     public CategoryDto update(@PathVariable Long id, @RequestBody CategoryDto categoryDto) {
-        CategoryDto existingCategoriaDto = categoryUseCases.findById(id);
-        if (existingCategoriaDto != null) {
-            existingCategoriaDto = categoryDto;
-            return categoryUseCases.save(existingCategoriaDto);
+        CategoryDto existingCategoryDto = categoryUseCases.findById(id);
+        if (existingCategoryDto == null) {
+            throw new ResourceNotFoundException("Categoria não encontrada");
         }
-        return null;
+        existingCategoryDto = categoryDto;
+        return categoryUseCases.save(existingCategoryDto);
     }
 
     @DeleteMapping("/{id}")

@@ -1,6 +1,7 @@
 package com.cleanArchitectureAndSolidstudy.api.infra.controllers;
 
 import com.cleanArchitectureAndSolidstudy.api.application.useCases.ProductUseCases;
+import com.cleanArchitectureAndSolidstudy.api.infra.Exceptions.ResourceNotFoundException;
 import com.cleanArchitectureAndSolidstudy.api.infra.dtos.ProductDto;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,11 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ProductDto findById(@PathVariable Long id) {
-        return productUseCases.findById(id);
+        ProductDto product = productUseCases.findById(id);
+        if (product == null) {
+            throw new ResourceNotFoundException("Produto não encontrado");
+        }
+        return product;
     }
 
     @PutMapping("/{id}")
