@@ -31,7 +31,7 @@ A Arquitetura Limpa, ou Clean Architecture, é um conjunto de práticas de desig
 Neste projeto, a Arquitetura Limpa é implementada da seguinte maneira:
 
 - **Domínio**: Contém as entidades (`Produto` e `Categoria`) e as interfaces de repositório (`ProdutoRepository` e `CategoriaRepository`). Esta camada não tem dependências externas e contém a lógica de negócios central.
-- **Aplicação**: Contém os casos de uso (`ProdutoUseCase` e `CategoriaUseCase`) que coordenam as operações de alto nível que o aplicativo pode realizar.
+- **Aplicação**: Contém os casos de uso (`ProdutoUseCase` e `CategoriaUseCase`) que coordenam as operações de alto nível que o aplicativo pode realizar (Perceba que os casos de uso poderiam ser divididos, mas para um projeto simples como esse, isso seria uma otimização prematura).
 - **Infraestrutura**: Contém as implementações de repositório (`ProdutoJpaRepository` e `CategoriaJpaRepository`) que interagem com o banco de dados, e os controladores (`ProdutoController` e `CategoriaController`) que lidam com as solicitações HTTP.
 
 ## Princípios SOLID
