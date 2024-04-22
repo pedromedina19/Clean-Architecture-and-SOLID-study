@@ -6,6 +6,9 @@ import com.cleanArchitectureAndSolidstudy.api.domain.repositories.CategoryReposi
 import com.cleanArchitectureAndSolidstudy.api.infra.dtos.CategoryDto;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CategoryUseCasesImpl implements CategoryUseCases {
     private final CategoryRepository categoryRepository;
@@ -19,6 +22,13 @@ public class CategoryUseCasesImpl implements CategoryUseCases {
         Category category = new Category(categoryDto);
         Category savedCategory = categoryRepository.save(category);
         return CategoryDto.fromCategory(savedCategory);
+    }
+
+    @Override
+    public List<CategoryDto> findAll(){
+        return categoryRepository.findAll().stream()
+                .map(CategoryDto::fromCategory)
+                .collect(Collectors.toList());
     }
 
     
