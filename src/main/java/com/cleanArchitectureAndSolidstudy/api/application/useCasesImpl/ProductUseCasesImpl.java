@@ -57,5 +57,10 @@ public class ProductUseCasesImpl implements ProductUseCases {
                 .collect(Collectors.toList());
     }
 
-    
+    @Override
+    public List<ProductDto> findByCategoryName(String nameCategory){
+        return productRepository.findByCategoryName(nameCategory).stream()
+                .map(ProductDto::fromProduct)
+                .collect(Collectors.toList());
+    }
 }
