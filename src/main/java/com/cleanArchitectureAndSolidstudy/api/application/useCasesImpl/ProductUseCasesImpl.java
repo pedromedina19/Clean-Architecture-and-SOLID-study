@@ -37,4 +37,9 @@ public class ProductUseCasesImpl implements ProductUseCases {
                 .map(ProductDto::fromProduct)
                 .orElse(null);
     }
+
+    @Override
+    public void deleteById(Long id){
+        productRepository.deleteById(id);
+    }
 }
