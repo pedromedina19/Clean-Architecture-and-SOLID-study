@@ -50,5 +50,12 @@ public class ProductUseCasesImpl implements ProductUseCases {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<ProductDto> findByPriceGreaterThan(Double price){
+        return productRepository.findByPriceGreaterThan(price).stream()
+                .map(ProductDto::fromProduct)
+                .collect(Collectors.toList());
+    }
+
     
 }
