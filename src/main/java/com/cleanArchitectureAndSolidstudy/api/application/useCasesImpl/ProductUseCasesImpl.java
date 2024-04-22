@@ -24,5 +24,17 @@ public class ProductUseCasesImpl implements ProductUseCases {
         return ProductDto.fromProduct(savedProduct);
     }
 
-    
+    @Override
+    public List<ProductDto> findAll(){
+        return productRepository.findAll().stream()
+                .map(ProductDto::fromProduct)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductDto findById(Long id){
+        return productRepository.findById(id)
+                .map(ProductDto::fromProduct)
+                .orElse(null);
+    }
 }
