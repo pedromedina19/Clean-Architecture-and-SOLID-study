@@ -42,4 +42,13 @@ public class ProductUseCasesImpl implements ProductUseCases {
     public void deleteById(Long id){
         productRepository.deleteById(id);
     }
+
+    @Override
+    public List<ProductDto> findByName(String name){
+        return productRepository.findByName(name).stream()
+                .map(ProductDto::fromProduct)
+                .collect(Collectors.toList());
+    }
+
+    
 }
