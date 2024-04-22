@@ -4,6 +4,7 @@ import com.cleanArchitectureAndSolidstudy.api.application.useCases.CategoryUseCa
 import com.cleanArchitectureAndSolidstudy.api.domain.entities.Category;
 import com.cleanArchitectureAndSolidstudy.api.domain.repositories.CategoryRepository;
 import com.cleanArchitectureAndSolidstudy.api.infra.dtos.CategoryDto;
+import com.cleanArchitectureAndSolidstudy.api.infra.dtos.ProductDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,5 +44,10 @@ public class CategoryUseCasesImpl implements CategoryUseCases {
         categoryRepository.deleteById(id);
     }
 
-    
+    @Override
+    public List<CategoryDto> findByName(String name){
+        return categoryRepository.findByName(name).stream()
+                .map(CategoryDto::fromCategory)
+                .collect(Collectors.toList());
+    }
 }
