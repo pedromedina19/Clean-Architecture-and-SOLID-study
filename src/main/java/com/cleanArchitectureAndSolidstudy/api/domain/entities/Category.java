@@ -22,10 +22,19 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Product> products;
 
+    public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("O nome da categoria não pode estar vazio");
+        }
+        this.name = name;
+    }
+
+
     //convert DTO into entity
     public Category(CategoryDto categoryDto){
         this.id = categoryDto.id();
-        this.name = categoryDto.name();
+        this.setName(categoryDto.name());
     }
+
 
 }

@@ -20,11 +20,27 @@ public class Product {
     @ManyToOne
     private Category category;
 
+    public void setPrice(Double price) {
+        if (price < 0) {
+            throw new IllegalArgumentException("O preço do produto não pode ser negativo");
+        }
+        this.price = price;
+    }
+
+    public void setCategory(Category category) {
+        if (category == null) {
+            throw new IllegalArgumentException("O produto deve ter uma categoria");
+        }
+        this.category = category;
+    }
+
+
+
     // Convert dto into entity
     public Product(ProductDto productDto){
         this.id = productDto.id();
         this.name = productDto.name();
-        this.price = productDto.price();
-        this.category = new Category(productDto.category());
+        this.setPrice(productDto.price());
+        this.setCategory(new Category(productDto.category()));
     }
 }
